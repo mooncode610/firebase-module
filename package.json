@@ -15,8 +15,7 @@
   "license": "MIT",
   "author": "Pascal Luther",
   "files": [
-    "lib",
-    "types/*.d.ts"
+    "lib"
   ],
   "main": "lib/module.js",
   "types": "types/index.d.ts",
@@ -29,8 +28,7 @@
   },
   "dependencies": {
     "firebase-admin": "^8.9.2",
-    "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.15"
+    "jwt-decode": "^2.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
