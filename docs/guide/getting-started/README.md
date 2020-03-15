@@ -85,6 +85,7 @@ modules: [
         onFirebaseHosting: false,
         services: {
           auth: {
+            persistence: 'local',
             initialize: {
               onAuthStateChangedMutation: "SET_AUTH_USER",
               onAuthStateChangedAction: null,
@@ -96,7 +97,6 @@ modules: [
                 '/api/',
                 /[^/]+/sub-path\//
               ],
-
               // Experimental Feature, use with caution.
               serverLogin: {
                 sessionLifetime: 60 * 60 * 1000 // one hour
