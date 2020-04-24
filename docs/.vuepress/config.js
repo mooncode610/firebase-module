@@ -9,12 +9,7 @@ module.exports = {
       }
     ]
   ],
-  theme: 'carbon',
   themeConfig: {
-    carbonAds: {
-      serve: "CE7D62JL",
-      placement: "packagesdeveoio"
-    },
     heroImage: '/logo-no-text.png',
     logo: '/logo-no-text.png',
     repo: 'nuxt-community/firebase-module',
