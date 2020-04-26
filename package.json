@@ -34,14 +34,14 @@
   "devDependencies": {
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
-    "@nuxt/types": "^0.7.5",
+    "@nuxt/types": "^0.7.4",
     "@nuxtjs/eslint-config": "latest",
     "@nuxtjs/module-test-utils": "^1.6.1",
     "@vuepress/plugin-google-analytics": "^1.4.1",
     "codecov": "latest",
     "cz-conventional-changelog": "latest",
     "eslint": "latest",
-    "firebase": "^7.14.2",
+    "firebase": "^7.14.1",
     "husky": "latest",
     "jest": "^25.4.0",
     "standard-version": "latest",
@@ -49,7 +49,7 @@
     "vuepress-theme-carbon": "^1.0.0"
   },
   "peerDependencies": {
-    "firebase": "^7.14.2",
+    "firebase": "^7.14.1",
     "nuxt": "^2.12.2"
   },
   "publishConfig": {
@@ -61,6 +61,6 @@
     }
   },
   "optionalDependencies": {
-    "firebase-admin": "^8.11.0"
+    "firebase-admin": "^8.10.0"
   }
 }
