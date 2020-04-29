@@ -2,7 +2,6 @@ import { ServerResponse } from 'http'
 import { Vue } from 'vue/types/vue'
 import { NuxtAppOptions, Configuration } from '@nuxt/types'
 import { NuxtConfiguration } from '@nuxt/vue-app'
-import { ServiceAccount } from 'firebase-admin'
 
 import firebase from 'firebase'
 import { auth } from 'firebase-admin'
@@ -36,13 +35,10 @@ export interface AuthServiceConfig extends ServiceConfig {
   ssr?:
     | boolean
     | {
-        credential: string | ServiceAccount | true
-        serverLogin?:
-          | boolean
-          | {
-              sessionLifetime?: number
-              loginDelay?: number
-            }
+        credential: string | true
+        serverLogin?: boolean | {
+          sessionLifetime?: number
+        }
         ignorePaths?: (string | RegExp)[]
       }
 }
@@ -77,16 +73,6 @@ export interface MessagingServiceConfig extends ServiceConfig {
           clickPath: string
         }
       }
-  notificationKey?: string
-  notificationOptionsMap?: {
-    title: string,
-    body?: string,
-    icon?: string,
-    badge?: string,
-    action?: string,
-    vibrate?: string
-  },
-  fcmPublicVapidKey?: '<publicVapidKey>'
 }
 
 export interface PerformanceServiceConfig extends ServiceConfig {}
@@ -227,13 +213,9 @@ declare module 'vuex/types/index' {
   }
 }
 
-export type FireAuthServerUser = Omit<
-  auth.UserRecord,
-  'disabled' | 'metadata' | 'providerData'
-> &
-  Partial<Pick<auth.UserRecord, 'disabled' | 'metadata' | 'providerData'>> & {
-    allClaims: auth.DecodedIdToken
-  }
+export type FireAuthServerUser = Omit<auth.UserRecord, 'disabled' | 'metadata' | 'providerData'>
+  & Partial<Pick<auth.UserRecord, 'disabled' | 'metadata' | 'providerData'>>
+  & { allClaims: auth.DecodedIdToken }
 
 declare module 'http' {
   interface ServerResponse {
