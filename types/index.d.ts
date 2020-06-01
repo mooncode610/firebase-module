@@ -77,6 +77,16 @@ export interface MessagingServiceConfig extends ServiceConfig {
           clickPath: string
         }
       }
+  notificationKey?: string
+  notificationOptionsMap?: {
+    title: string,
+    body?: string,
+    icon?: string,
+    badge?: string,
+    action?: string,
+    vibrate?: string
+  },
+  fcmPublicVapidKey?: '<publicVapidKey>'
 }
 
 export interface PerformanceServiceConfig extends ServiceConfig {}

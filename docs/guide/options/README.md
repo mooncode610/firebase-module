@@ -16,9 +16,7 @@ config: {
   storageBucket: '<storageBucket>',
   messagingSenderId: '<messagingSenderId>',
   appId: '<appId>',
-  measurementId: '<measurementId>',
-  // OPTIONAL: Additional config for other services:
-  fcmPublicVapidKey: '<publicVapidKey>' // Sets vapid key for FCM after initialization
+  measurementId: '<measurementId>'
 }
 ```
 
@@ -139,7 +137,7 @@ Only applies if `static === false`.
 
 #### chunkName
 
-By default, the dynamically imported services are named `vendors.firebase-${serviceName}.js` in development mode, and `[id]` in production mode (`process.env.NODE_ENV === 'production'`). If you want to change this behaviour, you can do so with this option.
+Be default, the dynamically imported services are named `vendors.firebase-${serviceName}.js` in development mode, and `[id]` in production mode (`process.env.NODE_ENV === 'production'`). If you want to change this behaviour, you can do so with this option.
 
 ::: warning Be aware
 Only applies if `static === false`.
@@ -518,7 +516,8 @@ messaging: true
 // or
 
 messaging: {
-  createServiceWorker: false
+  createServiceWorker: false,
+  fcmPublicVapidKey: '<publicVapidKey>' // OPTIONAL : Sets vapid key for FCM after initialization
 }
 ```
 
@@ -556,7 +555,7 @@ performance: true
 
 ### analytics
 
-Initializes Firebase Analytics and makes it available via `$fireAnalytics` and `$fireAnalyticsObj`.
+Initializes Firebase Storage and makes it available via `$fireAnalytics` and `$fireAnalyticsObj`.
 
 - Type: `Boolean` or `Object`
 - Default: `false`
@@ -567,7 +566,7 @@ analytics: true
 
 ### remoteConfig
 
-Initializes Firebase Remote Config and makes it available via `$fireConfig` and `$fireConfigObj`.
+Initializes Firebase Storage and makes it available via `$fireConfig` and `$fireConfigObj`.
 
 - Type: `Boolean` or `Object`
 - Default: `false`
