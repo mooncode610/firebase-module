@@ -16,9 +16,7 @@ config: {
   storageBucket: '<storageBucket>',
   messagingSenderId: '<messagingSenderId>',
   appId: '<appId>',
-  measurementId: '<measurementId>',
-  // OPTIONAL: Additional config for other services:
-  fcmPublicVapidKey: '<publicVapidKey>' // Sets vapid key for FCM after initialization
+  measurementId: '<measurementId>'
 }
 ```
 
@@ -139,7 +137,7 @@ Only applies if `static === false`.
 
 #### chunkName
 
-By default, the dynamically imported services are named `vendors.firebase-${serviceName}.js` in development mode, and `[id]` in production mode (`process.env.NODE_ENV === 'production'`). If you want to change this behaviour, you can do so with this option.
+Be default, the dynamically imported services are named `vendors.firebase-${serviceName}.js` in development mode, and `[id]` in production mode (`process.env.NODE_ENV === 'production'`). If you want to change this behaviour, you can do so with this option.
 
 ::: warning Be aware
 Only applies if `static === false`.
@@ -508,6 +506,7 @@ realtimeDb: true
 ### messaging
 
 Initializes Firebase Messaging and makes it available via `$fireMess` and `$fireMessObj`.
+Message payload is expected as defined by Firebase [here](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#WebpushConfig).
 
 - Type: `Boolean` or `Object`
 - Default: `false`
@@ -518,30 +517,60 @@ messaging: true
 // or
 
 messaging: {
-  createServiceWorker: false
+  createServiceWorker: false,
+  actions: [
+    {
+      action: 'randomName',
+      url: 'randomUrl'
+    }
+  ]
+  fcmPublicVapidKey: '<publicVapidKey>' // OPTIONAL : Sets vapid key for FCM after initialization
 }
 ```
 
-#### createServiceWorker <Badge text="EXPERIMENTAL" type="warn"/>
+#### createServiceWorker
 
 - Type: `Boolean` or `Object`
 - Default: `false`
 
 Setting the **createServiceWorker** flag to true automatically creates a service worker called `firebase-messaging-sw.js` in your static folder. The service worker is fully configured for FCM with the newest Firebase scripts.
 
-##### Notification Payload
+#### actions
 
-In the same way the [Notification Composer](https://console.firebase.google.com/project/nuxt-fire-demo/notification/compose) does, we expect the notification format payload be named **notification** and can contain the following config:
+> Only works if `createServiceWorker === true`
+
+An array of actions for which a `notificationClick` handler should be registered in the service worker that opens the defined url for the specific action sent by the payload.
 
 ```js
-notification: {
-  title: "FCM Message",
-  body: "This is a message from FCM",
-  image: '<imageUrl>',
-  vibrate: [200, 100, 200, 100, 200, 100, 200],
-  clickPath: '<egYourWebsiteUrl>'
+{
+  action: 'randomName',
+  url: 'randomUrl'
 }
 ```
+
+Make sure to define the action in your payload like so:
+
+```js
+const message = {
+    // ...
+    "webpush": {
+      "notification": {
+        "actions": [
+          {
+            action: "randomName",
+            title: "Go to URL"
+          }
+        ]
+      },
+    },
+    // ...
+}
+await messaging.send(message)
+```
+
+#### fcmPublicVapidKey
+
+Allows FCM to use the VAPID key credential when sending message requests to different push services, see more [here](https://firebase.google.com/docs/cloud-messaging/js/client).
 
 ### performance
 
@@ -556,7 +585,7 @@ performance: true
 
 ### analytics
 
-Initializes Firebase Analytics and makes it available via `$fireAnalytics` and `$fireAnalyticsObj`.
+Initializes Firebase Storage and makes it available via `$fireAnalytics` and `$fireAnalyticsObj`.
 
 - Type: `Boolean` or `Object`
 - Default: `false`
@@ -567,7 +596,7 @@ analytics: true
 
 ### remoteConfig
 
-Initializes Firebase Remote Config and makes it available via `$fireConfig` and `$fireConfigObj`.
+Initializes Firebase Storage and makes it available via `$fireConfig` and `$fireConfigObj`.
 
 - Type: `Boolean` or `Object`
 - Default: `false`
