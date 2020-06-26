@@ -88,9 +88,7 @@ export interface MessagingServiceConfig extends ServiceConfig {
 
 export interface PerformanceServiceConfig extends ServiceConfig {}
 
-export interface AnalyticsServiceConfig extends ServiceConfig {
-  collectionEnabled?: boolean
-}
+export interface AnalyticsServiceConfig extends ServiceConfig {}
 
 export interface RemoteConfigServiceConfig extends ServiceConfig {
   settings?: {
