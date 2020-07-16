@@ -101,9 +101,6 @@ export interface RemoteConfigServiceConfig extends ServiceConfig {
 }
 
 export interface FirebaseModuleConfiguration {
-  legacyMode?: boolean,
-  injectModule?: boolean,
-  lazy?: boolean,
   config:
     | {
         [envKey: string]: FirebaseConfiguration
@@ -126,7 +123,6 @@ export interface FirebaseModuleConfiguration {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    // LegacyMode
     $fireStore: firebase.firestore.Firestore
     $fireStoreObj: typeof firebase.firestore
     $fireDb: firebase.database.Database
@@ -146,19 +142,6 @@ declare module 'vue/types/vue' {
     $firePerfObj: typeof firebase.performance
     $fireConfig: firebase.remoteConfig.RemoteConfig
     $fireConfigObj: typeof firebase.remoteConfig
-    // From v7+
-    $fireObj: typeof firebase
-    $fire: {
-      auth: firebase.auth.Auth
-      realtimeDb: firebase.database.Database
-      firestore: firebase.firestore.Firestore
-      storage: firebase.storage.Storage
-      functions: firebase.functions.Functions
-      messaging: firebase.messaging.Messaging
-      performance: firebase.performance.Performance
-      analytics: firebase.analytics.Analytics
-      remoteConfig: firebase.remoteConfig.RemoteConfig
-    }
   }
 }
 
@@ -168,7 +151,6 @@ declare module '@nuxt/vue-app' {
   }
 
   interface NuxtAppOptions {
-    // LegacyMode
     $fireStore: firebase.firestore.Firestore
     $fireStoreObj: typeof firebase.firestore
     $fireDb: firebase.database.Database
@@ -188,19 +170,6 @@ declare module '@nuxt/vue-app' {
     $firePerfObj: typeof firebase.performance
     $fireConfig: firebase.remoteConfig.RemoteConfig
     $fireConfigObj: typeof firebase.remoteConfig
-     // From v7+
-     $fireObj: typeof firebase
-     $fire: {
-       auth: firebase.auth.Auth
-       realtimeDb: firebase.database.Database
-       firestore: firebase.firestore.Firestore
-       storage: firebase.storage.Storage
-       functions: firebase.functions.Functions
-       messaging: firebase.messaging.Messaging
-       performance: firebase.performance.Performance
-       analytics: firebase.analytics.Analytics
-       remoteConfig: firebase.remoteConfig.RemoteConfig
-     }
   }
 }
 
@@ -211,7 +180,6 @@ declare module '@nuxt/types' {
   }
 
   interface NuxtAppOptions {
-    // LegacyMode
     $fireStore: firebase.firestore.Firestore
     $fireStoreObj: typeof firebase.firestore
     $fireDb: firebase.database.Database
@@ -231,25 +199,11 @@ declare module '@nuxt/types' {
     $firePerfObj: typeof firebase.performance
     $fireConfig: firebase.remoteConfig.RemoteConfig
     $fireConfigObj: typeof firebase.remoteConfig
-     // From v7+
-     $fireObj: typeof firebase
-     $fire: {
-       auth: firebase.auth.Auth
-       realtimeDb: firebase.database.Database
-       firestore: firebase.firestore.Firestore
-       storage: firebase.storage.Storage
-       functions: firebase.functions.Functions
-       messaging: firebase.messaging.Messaging
-       performance: firebase.performance.Performance
-       analytics: firebase.analytics.Analytics
-       remoteConfig: firebase.remoteConfig.RemoteConfig
-     }
   }
 }
 
 declare module 'vuex/types/index' {
   interface Store<S> {
-     // LegacyMode
     readonly $fireStore: firebase.firestore.Firestore
     $fireStoreObj: typeof firebase.firestore
     $fireDb: firebase.database.Database
@@ -269,19 +223,6 @@ declare module 'vuex/types/index' {
     $firePerfObj: typeof firebase.performance
     $fireConfig: firebase.remoteConfig.RemoteConfig
     $fireConfigObj: typeof firebase.remoteConfig
-     // From v7+
-     $fireObj: typeof firebase
-     $fire: {
-       auth: firebase.auth.Auth
-       realtimeDb: firebase.database.Database
-       firestore: firebase.firestore.Firestore
-       storage: firebase.storage.Storage
-       functions: firebase.functions.Functions
-       messaging: firebase.messaging.Messaging
-       performance: firebase.performance.Performance
-       analytics: firebase.analytics.Analytics
-       remoteConfig: firebase.remoteConfig.RemoteConfig
-     }
   }
 }
 
