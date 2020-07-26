@@ -611,7 +611,7 @@ analytics: true
 
 // or
 
-analytics: {
+messaging: {
   collectionEnabled: true, // default
 }
 ```
