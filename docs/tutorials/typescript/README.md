@@ -1,15 +1,11 @@
----
-title: Usage with Typescript
-description: ''
-position: 10
-category: Tutorials
----
+# Usage with Typescript
 
 The module comes with types by providing a decleration file (`index.d.ts`) within the npm package.
 
 All you need to do is to include "@nuxtjs/firebase" in your tsconfig.json types like so:
 
-```json[tsconfig.json]
+```json
+// tsconfig.json
 {
   "compilerOptions": {
     "types": [

@@ -1,9 +1,4 @@
----
-title: Migration guides
-description: ''
-position: 6
-category: Guide
----
+# Migration guides
 
 ## Upgrade from v4 to v5
 
@@ -11,7 +6,7 @@ In v5 a major overhaul of the `auth` configuration was introduced.
 
 ### 1 - Rename `auth.initialize.onAuthSuccessAction` and `auth.initialize.onAuthSuccessMutation`
 
-```js[nuxt.config.js]
+```js
 firebase: {
   services: {
     auth: {
@@ -35,7 +30,7 @@ firebase: {
 There is no real fail case for the listener itself, so the decision was taken to delegate error handling to the user.  
 If you need error handling, please adjust your `onAuthStateChangedAction` accordingly.
 
-```js[nuxt.config.js]
+```js
 firebase: {
   services: {
     auth: {
@@ -99,7 +94,7 @@ A quick summary of the necessary changes follows:
 
 #### 1 - Move the `ssr` key out of the `initialize` configuration
 
-```js[nuxt.config.js]
+```js
 firebase: {
   services: {
     auth: {
@@ -124,7 +119,7 @@ For now do it manually
 
 In `nuxt.config.js`
 
-```js[nuxt.config.js]
+```js
 module.exports = {
   modules: [
     // ...
@@ -191,7 +186,7 @@ To make it consistent, we also changed certain namings within the module, so whe
 
 ### 1 - Rename module import in nuxt.config.js
 
-```js[nuxt.config.js]
+```js
 // Old
 modules: ['nuxt-fire'],
 // New
@@ -202,7 +197,7 @@ modules: ['@nuxtjs/firebase'],
 
 Only if options are not set directly in the modules-array:
 
-```js[nuxt.config.js]
+```js
 // Old
 fire: {
   // all the options
@@ -217,7 +212,7 @@ firebase: {
 
 Only if using typescript:
 
-```json[tsconfig.json]
+```json
 // Old
 {
   "compilerOptions": {
@@ -238,9 +233,9 @@ Only if using helpers:
 
 ```js
 // Old
-import { helperFunctionName } from 'nuxt-fire/src/helpers'
+import { **helperFunctionName** } from 'nuxt-fire/src/helpers'
 // New
-import { helperFunctionName } from '@nuxtjs/firebase/src/helpers'
+import { **helperFunctionName** } from '@nuxtjs/firebase/src/helpers'
 ```
 
 After all these changes, don't forget to rerun `npm install` or `yarn` and restart your IDE (e.g. VSCODE), then all should be good.

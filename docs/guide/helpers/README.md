@@ -1,14 +1,9 @@
----
-title: Helpers
-description: ''
-position: 5
-category: Guide
----
+# Helpers
 
 This module provides helper functions that can generally be accessed like so:
 
 ```js
-import { helperFunctionName } from '@nuxtjs/firebase/lib/helpers'
+import { **helperFunctionName** } from '@nuxtjs/firebase/lib/helpers'
 ```
 
 ## movePluginBeforeInitAuthPlugin()
