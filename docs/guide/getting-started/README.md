@@ -1,53 +1,21 @@
----
-title: Getting Started
-description: ''
-position: 2
-category: Guide
----
+# Getting Started
 
 ## Requirements
 
 Make sure you have the newest versions of Nuxt and Firebase installed and setup in your project.
 
-<code-group>
-  <code-block label="Yarn" active>
-
-  ```bash
-  yarn add nuxt
-  yarn add firebase
-  ```
-
-  </code-block>
-  <code-block label="NPM">
-
-  ```bash
-  npm install nuxt
-  npm install firebase
-  ```
-
-  </code-block>
-</code-group>
+```bash
+yarn add nuxt # OR npm i nuxt
+yarn add firebase # OR npm i firebase
+```
 
 ## Install
 
 Install the module via NPM or Yarn.
 
-<code-group>
-  <code-block label="Yarn" active>
-
-  ```bash
-  yarn add @nuxtjs/firebase
-  ```
-
-  </code-block>
-  <code-block label="NPM">
-
-  ```bash
-  npm install @nuxtjs/firebase
-  ```
-
-  </code-block>
-</code-group>
+```bash
+yarn add @nuxtjs/firebase # OR npm i @nuxtjs/firebase
+```
 
 ## Configure
 
@@ -57,7 +25,7 @@ Visit the [config section](/guide/options/#config) for a detailed overview about
 
 ### Simple Configuration
 
-```js[nuxt.config.js]
+```js
 modules: [
     [
       '@nuxtjs/firebase',
@@ -86,7 +54,7 @@ See list of available services [here](/guide/options/#services).
 
 If you want to use every little configuration option there is, refer to the example below.
 
-```js[nuxt.config.js]
+```js
 modules: [
     [
       '@nuxtjs/firebase',
@@ -174,7 +142,7 @@ modules: [
 
 You can also separate the config from the module array by using the **firebase** object:
 
-```js[nuxt.config.js]
+```js
 modules: ['@nuxtjs/firebase'],
 
 firebase: {
