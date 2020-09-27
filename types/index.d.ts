@@ -7,6 +7,9 @@ import { ServiceAccount } from 'firebase-admin'
 import firebase from 'firebase'
 import { auth } from 'firebase-admin'
 
+/***********************************
+ * Module Config
+************************************/
 export interface FirebaseConfiguration {
   apiKey: string
   authDomain: string
@@ -101,6 +104,9 @@ export interface RemoteConfigServiceConfig extends ServiceConfig {
 }
 
 export interface FirebaseModuleConfiguration {
+  legacyMode?: boolean,
+  injectModule?: boolean,
+  lazy?: boolean,
   config:
     | {
         [envKey: string]: FirebaseConfiguration
@@ -121,8 +127,17 @@ export interface FirebaseModuleConfiguration {
   onFirebaseHosting?: boolean | object
 }
 
+/***********************************
+ * Injections
+************************************/
+
+interface ReadyFunction {
+  (): void;
+}
+
 declare module 'vue/types/vue' {
   interface Vue {
+    // LegacyMode
     $fireStore: firebase.firestore.Firestore
     $fireStoreObj: typeof firebase.firestore
     $fireDb: firebase.database.Database
@@ -142,6 +157,28 @@ declare module 'vue/types/vue' {
     $firePerfObj: typeof firebase.performance
     $fireConfig: firebase.remoteConfig.RemoteConfig
     $fireConfigObj: typeof firebase.remoteConfig
+    // From v7+
+    $fireObj: typeof firebase
+    $fire: {
+      auth: firebase.auth.Auth
+      authReady: ReadyFunction
+      database: firebase.database.Database
+      databaseReady: ReadyFunction
+      firestore: firebase.firestore.Firestore
+      firestoreReady: ReadyFunction
+      functions: firebase.functions.Functions
+      functionsReady: ReadyFunction
+      storage: firebase.storage.Storage
+      storageReady: ReadyFunction
+      messaging: firebase.messaging.Messaging
+      messagingReady: ReadyFunction
+      performance: firebase.performance.Performance
+      performanceReady: ReadyFunction
+      analytics: firebase.analytics.Analytics
+      analyticsReady: ReadyFunction
+      remoteConfig: firebase.remoteConfig.RemoteConfig
+      remoteConfigReady: ReadyFunction
+    }
   }
 }
 
@@ -151,6 +188,7 @@ declare module '@nuxt/vue-app' {
   }
 
   interface NuxtAppOptions {
+    // LegacyMode
     $fireStore: firebase.firestore.Firestore
     $fireStoreObj: typeof firebase.firestore
     $fireDb: firebase.database.Database
@@ -170,6 +208,28 @@ declare module '@nuxt/vue-app' {
     $firePerfObj: typeof firebase.performance
     $fireConfig: firebase.remoteConfig.RemoteConfig
     $fireConfigObj: typeof firebase.remoteConfig
+     // From v7+
+     $fireObj: typeof firebase
+     $fire: {
+      auth: firebase.auth.Auth
+      authReady: ReadyFunction
+      database: firebase.database.Database
+      databaseReady: ReadyFunction
+      firestore: firebase.firestore.Firestore
+      firestoreReady: ReadyFunction
+      functions: firebase.functions.Functions
+      functionsReady: ReadyFunction
+      storage: firebase.storage.Storage
+      storageReady: ReadyFunction
+      messaging: firebase.messaging.Messaging
+      messagingReady: ReadyFunction
+      performance: firebase.performance.Performance
+      performanceReady: ReadyFunction
+      analytics: firebase.analytics.Analytics
+      analyticsReady: ReadyFunction
+      remoteConfig: firebase.remoteConfig.RemoteConfig
+      remoteConfigReady: ReadyFunction
+    }
   }
 }
 
@@ -180,6 +240,7 @@ declare module '@nuxt/types' {
   }
 
   interface NuxtAppOptions {
+    // LegacyMode
     $fireStore: firebase.firestore.Firestore
     $fireStoreObj: typeof firebase.firestore
     $fireDb: firebase.database.Database
@@ -199,11 +260,34 @@ declare module '@nuxt/types' {
     $firePerfObj: typeof firebase.performance
     $fireConfig: firebase.remoteConfig.RemoteConfig
     $fireConfigObj: typeof firebase.remoteConfig
+     // From v7+
+     $fireObj: typeof firebase
+     $fire: {
+      auth: firebase.auth.Auth
+      authReady: ReadyFunction
+      database: firebase.database.Database
+      databaseReady: ReadyFunction
+      firestore: firebase.firestore.Firestore
+      firestoreReady: ReadyFunction
+      functions: firebase.functions.Functions
+      functionsReady: ReadyFunction
+      storage: firebase.storage.Storage
+      storageReady: ReadyFunction
+      messaging: firebase.messaging.Messaging
+      messagingReady: ReadyFunction
+      performance: firebase.performance.Performance
+      performanceReady: ReadyFunction
+      analytics: firebase.analytics.Analytics
+      analyticsReady: ReadyFunction
+      remoteConfig: firebase.remoteConfig.RemoteConfig
+      remoteConfigReady: ReadyFunction
+    }
   }
 }
 
 declare module 'vuex/types/index' {
   interface Store<S> {
+     // LegacyMode
     readonly $fireStore: firebase.firestore.Firestore
     $fireStoreObj: typeof firebase.firestore
     $fireDb: firebase.database.Database
@@ -223,8 +307,34 @@ declare module 'vuex/types/index' {
     $firePerfObj: typeof firebase.performance
     $fireConfig: firebase.remoteConfig.RemoteConfig
     $fireConfigObj: typeof firebase.remoteConfig
+     // From v7+
+     $fireObj: typeof firebase
+     $fire: {
+      auth: firebase.auth.Auth
+      authReady: ReadyFunction
+      database: firebase.database.Database
+      databaseReady: ReadyFunction
+      firestore: firebase.firestore.Firestore
+      firestoreReady: ReadyFunction
+      functions: firebase.functions.Functions
+      functionsReady: ReadyFunction
+      storage: firebase.storage.Storage
+      storageReady: ReadyFunction
+      messaging: firebase.messaging.Messaging
+      messagingReady: ReadyFunction
+      performance: firebase.performance.Performance
+      performanceReady: ReadyFunction
+      analytics: firebase.analytics.Analytics
+      analyticsReady: ReadyFunction
+      remoteConfig: firebase.remoteConfig.RemoteConfig
+      remoteConfigReady: ReadyFunction
+    }
   }
 }
+
+/***********************************
+ * Misc
+************************************/
 
 export type FireAuthServerUser = Omit<
   auth.UserRecord,
