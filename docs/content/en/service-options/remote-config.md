@@ -1,11 +1,11 @@
 ---
 title: remoteConfig
 description: ''
-position: 14
+position: 15
 category: Service Options
 ---
 
-Initializes **Firebase Remote Config** and makes it available via `$fire.remoteConfig` and `$fireModule.remoteConfig`.
+Initializes Firebase Remote Config and makes it available via `$fireConfig` and `$fireConfigObj`.
 
 - Type: `Boolean` or `Object`
 - Default: `false`

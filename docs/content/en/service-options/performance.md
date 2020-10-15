@@ -1,11 +1,11 @@
 ---
 title: performance
 description: ''
-position: 12
+position: 13
 category: Service Options
 ---
 
-Initializes **Firebase Performance** and makes it available via `$fire.performance` and `$fireModule.performance`.
+Initializes Firebase Performance and makes it available via `$firePerf` and `$firePerfObj`.
 
 - Type: `Boolean`
 - Default: `false`
