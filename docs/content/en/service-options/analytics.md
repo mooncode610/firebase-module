@@ -1,11 +1,11 @@
 ---
 title: analytics
 description: ''
-position: 13
+position: 14
 category: Service Options
 ---
 
-Initializes **Firebase Analytics** and makes it available via `$fire.analytics` and `$fireModule.analytics`.
+Initializes Firebase Analytics and makes it available via `$fireAnalytics` and `$fireAnalyticsObj`.
 
 - Type: `Boolean` or `Object`
 - Default: `false`

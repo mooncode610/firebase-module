@@ -1,17 +1,17 @@
 ---
-title: database
+title: realtimeDb
 description: ''
-position: 9
+position: 11
 category: Service Options
 ---
 
-Initializes **Firebase Realtime Database** and makes it available via `$fire.database` and `$fireModule.database`.
+Initializes Firebase Realtime Database and makes it available via `$fireDb` and `$fireDbObj`.
 
 - Type: `Boolean`
 - Default: `false`
 
 ```js[nuxt.config.js]
-database: true
+realtimeDb: true
 ```
 
 Currently, there are no advanced options available.

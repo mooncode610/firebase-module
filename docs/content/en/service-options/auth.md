@@ -5,7 +5,7 @@ position: 7
 category: Service Options
 ---
 
-Initializes **Firebase Authentication** and makes it available via `$fire.auth` and `$fireModule.auth`.
+Initializes Firebase Authentication and makes it available via `$fireAuth` and `$fireAuthObj`.
 
 - Type: `Boolean` or `Object`
 - Default: `false`
@@ -15,8 +15,7 @@ auth: {
   persistence: 'local', // default
   initialize: {
     onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
-    onAuthStateChangedAction: 'onAuthStateChangedAction',
-    subscribeManually: false
+    onAuthStateChangedAction: 'onAuthStateChangedAction'
   },
   ssr: false // default
 }
@@ -34,7 +33,7 @@ Just add a mutation/action to your vuex store ([as seen below](#onauthstatechang
 
 When onAuthStateChanged() gets triggered by Firebase, the defined mutation/action will be called with the `authUser` and `claims` attributes as [as seen below](#onauthstatechangedmutation)
 
-To unsubscribe from the listener simply call the `$fireAuthStore.unsubscribe()` function.
+To unsubscribe from the listener simply call the `$fireAuthUnsubscribe()` function which is provided as a [combined inject](https://nuxtjs.org/guide/plugins#combined-inject).
 
 ### onAuthStateChangedMutation
 
@@ -80,24 +79,6 @@ onAuthStateChangedAction: (ctx, { authUser, claims }) => {
 }
 ```
 
-### subscribeManually
-
-By settings `subscribeManually: true`, the `onAuthStateChanged()` listener won't be set up until you call it manually:
-
-```js
-// e.g. in a seperate Plugin
-this.$fireAuthStore.subscribe()
-```
-
-This is needed in case you need to start other plugins *after* Firebase is initialized but *before* `onAuthStateChanged()` is set up.
-
-<alert>
-<p><b>Example:</b></p>
-<p>For example with the Sentry module, you migth want to set some user-related information in Sentry each time <code>onAuthStateChanged</code> is triggered. In that case, Sentry needs to be setup before <code>onAuthStateChanged()</code>.</p><br>You can achieve this by manually calling <code>this.$fireAuthStore.subscribe()</code> after Sentry has been initialized.
-</alert>
-
-
-
 ## ssr
 
 This sets up SSR ready functionality with minimal effort.
@@ -120,7 +101,7 @@ A tutorial on how to set this up can be found [here](/tutorials/ssr).
 
 <alert type="info">
 <p><b>Please Note:</b></p>
-<p>This <u>does not authenticate the Firebase instance on the server</u>. While you will be able to know if a user is logged in or not and have access to its simplified properties, you <u>won't be able to do authenticated calls</u> on server-side.</p><br>
+<p>This <u>does not authenticate the Firebase Client SDK on the server</u>. While you will be able to know if a user is logged in or not and have access to its simplified properties, you <u>won't be able to do authenticated calls</u> on server-side.</p><br>
 <p>This means that all calls on server-side (e.g. fetching data via Firestore in fetch-hooks), which are protected by security rules, will still fail with <i>insufficient privileges.</i></p>
 <br>
 <p>Reason for this is that the Firebase JS SDK is a client-side library that is not built for authenticating multiple users. See the <nuxt-link to="/service-options/auth#serverlogin">serverLogin</nuxt-link> option for an <b>experimental</b> approach to solve this issue.</p>

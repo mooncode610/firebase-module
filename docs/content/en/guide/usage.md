@@ -7,48 +7,37 @@ category: Guide
 
 ## General Usage
 
-This module injects two main utilities into your context, `$fire` and `$fireModule`.
+You can access the various Firebase products with **$foo** in almost any context using `app.$foo` or `this.$foo`, including store actions. Make sure to replace the _foo_ with a shortcut from the table below.
 
-You can access these in almost any context using `app.$fire`/`app.$fireModule` or `this.$fire`/`this.$fireModule` - including store actions.
+Firebase products supported by this module so far:
 
-<alert>
-<p><b>Understand the difference!</b></p>
-While <code>$fire</code> contains the initialized service instances, <code>$fireModule</code> gives you access to the (not-initialized) <b>Firebase</b> module itself with all its static methods.
-</alert>
-
-### $fire
-
-`$fire` gives you access to the initialized service instances:
-
-| Firebase Service  | Shortcut           |
-| ----------------- | ------------------ |
-| Authentication    | $fire.auth         |
-| Realtime Database | $fire.database     |
-| Firestore         | $fire.firestore    |
-| Storage           | $fire.storage      |
-| Functions         | $fire.functions    |
-| Messaging         | $fire.messaging    |
-| Performance       | $fire.performance  |
-| Analytics         | $fire.analytics    |
-| Remote Config     | $fire.remoteConfig |
+| Firebase Product  | Shortcut       |
+| ----------------- | -------------- |
+| Authentication    | $fireAuth      |
+| Realtime Database | $fireDb        |
+| Firestore         | $fireStore     |
+| Storage           | $fireStorage   |
+| Functions         | $fireFunc      |
+| Messaging         | $fireMess      |
+| Performance       | $firePerf      |
+| Analytics         | $fireAnalytics |
+| Remote Config     | $fireConfig    |
 
 See [Firebase's official docs](https://firebase.google.com/docs/) for more usage information.
 
-### $fireModule
+You can further access the objects like so:
 
-`$fireModule` gives you access to the **Firebase** modules themselves with all their static methods.
-
-| Firebase Module       | Shortcut                 |
-| --------------------- | ------------------------ |
-| firebase.auth         | $fireModule.auth         |
-| firebase.database     | $fireModule.database     |
-| firebase.firestore    | $fireModule.firestore    |
-| firebase.storage      | $fireModule.storage      |
-| firebase.functions    | $fireModule.functions    |
-| firebase.messaging    | $fireModule.messaging    |
-| firebase.performance  | $fireModule.performance  |
-| firebase.analytics    | $fireModule.analytics    |
-| firebase.remoteConfig | $fireModule.remoteConfig |
+| Firebase Obj          | Shortcut          |
+| --------------------- | ----------------- |
+| firebase.auth         | $fireAuthObj      |
+| firebase.database     | $fireDbObj        |
+| firebase.firestore    | $fireStoreObj     |
+| firebase.storage      | $fireStorageObj   |
+| firebase.functions    | $fireFuncObj      |
+| firebase.messaging    | $fireMessObj      |
+| firebase.performance  | $firePerfObj      |
+| firebase.analytics    | $fireAnalyticsObj |
+| firebase.remoteConfig | $fireConfigObj    |
 
 ## Examples
 
@@ -59,7 +48,7 @@ export default {
   methods: {
     async createUser() {
       try {
-        await this.$fire.auth.createUserWithEmailAndPassword(
+        await this.$fireAuth.createUserWithEmailAndPassword(
           'foo@foo.foo',
           'test'
         )
@@ -76,10 +65,10 @@ Access Firestore and it's Object in a vuex store action:
 ```js
 export default {
   async randomVuexAction({ commit, state, rootState }, userId) {
-    const ref = this.$fire.firestore.collection('users').doc(userId)
+    const ref = this.$fireStore.collection('users').doc(userId)
     try {
       await exerciseRef.update({
-        [`randomFoo.FooFoo`]: this.$fireModule.firestore.FieldValue.delete()
+        [`randomFoo.FooFoo`]: this.$fireStoreObj.FieldValue.delete()
       })
     } catch (e) {
       return Promise.reject(e)
