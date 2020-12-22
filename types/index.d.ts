@@ -56,6 +56,7 @@ export interface AuthServiceConfig extends ServiceConfig {
 
   emulatorPort?: number
   emulatorHost?: string
+  disableEmulatorWarnings?: boolean
 }
 
 export interface FirestoreServiceConfig extends ServiceConfig {
@@ -96,8 +97,7 @@ export interface MessagingServiceConfig extends ServiceConfig {
         }
       }
   actions?: messagingAction[],
-  fcmPublicVapidKey?: string,
-  inject?: string
+  fcmPublicVapidKey?: string
 }
 
 export interface PerformanceServiceConfig extends ServiceConfig {}
